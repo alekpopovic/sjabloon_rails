@@ -1,0 +1,9 @@
+<script async src="https://www.googletagmanager.com/gtag/js?id=<%= ENV["ANALYTICS_PROVIDER_ID"] %>"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+
+  gtag("config", "<%= ENV["ANALYTICS_PROVIDER_ID"] %>", { 'anonymize_ip': true });
+</script>
+

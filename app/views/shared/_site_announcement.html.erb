@@ -1,0 +1,14 @@
+<div class="site-announcement" data-controller="sjabloon--site-announcements" data-target="sjabloon--site-announcements.banner" data-sjabloon--site-announcements-id="<%= last_announcement.id %>" data-sjabloon--site-announcements-site-name="<%= Rails.configuration.application_name.parameterize %>">
+  <span class="site-announcement__badge <%= "site-announcement__badge--#{last_announcement.announcement_type}" %>">
+    <%= last_announcement.announcement_type %>
+  </span>
+
+  <p class="site-announcement__title"><%= last_announcement.title %></p>
+
+  <%= link_to "Learn more", last_announcement.target? ? last_announcement.target : announcements_path(anchor: last_announcement), class: "site-announcement__action" %>
+
+  <button class="site-announcement__close" data-action="click->sjabloon--site-announcements#dismiss">
+    <%= embedded_svg "close.svg", class: "site-announcement__close-icon" %>
+  </button>
+</div>
+

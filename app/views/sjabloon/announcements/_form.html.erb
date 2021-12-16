@@ -1,0 +1,45 @@
+  <%= form_with(model: announcement, url: url, local: true, class: "mt-8") do |form| %>
+  <%= render "shared/flash", flash: announcement.errors %>
+
+  <div class="flex flex-col sm:flex-row">
+    <div class="field w-full sm:w-1/2 sm:mr-4">
+      <%= form.label :title %>
+      <%= form.text_field :title, required: true, class: "input" %>
+    </div>
+
+    <div class="field w-full sm:w-1/2 sm:ml-4">
+      <%= form.label :announcement_type %>
+      <%= form.select :announcement_type, options_for_select(Sjabloon::Announcement::ANNOUNCEMENT_TYPES, form.object.announcement_type), { }, class: "input" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :body %>
+    <%= form.text_area :body, required: true, class: "input" %>
+  </div>
+
+  <div class="flex flex-col sm:flex-row">
+    <div class="field w-full sm:w-1/2 sm:mr-4">
+      <%= form.label :show_site_wide %>
+      <%= form.select :show_site_wide, options_for_select(Sjabloon::Announcement::SITE_WIDE_OPTIONS, form.object.show_site_wide), { include_blank: true }, class: "input" %>
+      <i class="field__helper">Show a site-wide banner to either your visitors or only your logged-in users</i>
+    </div>
+
+    <div class="field w-full sm:w-1/2 sm:ml-4">
+      <%= form.label :target %>
+      <%= form.text_field :target, class: "input" %>
+      <i class="field__helper">Point the banner to a different page other /announcements</i>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :published_at %>
+    <%= form.datetime_select :published_at, class: "input" %>
+  </div>
+
+  <div class="buttons">
+    <%= form.submit class: "btn btn--primary"%>
+    <%= link_to "Cancel", announcements_path, class: "btn text-gray-600" %>
+  </div>
+<% end %>
+

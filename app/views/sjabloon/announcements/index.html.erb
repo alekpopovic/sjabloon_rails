@@ -1,0 +1,38 @@
+  <% content_for :page_title, t('announcements.meta_title', app_name: Rails.configuration.application_name) %>
+<% content_for :page_description, t('announcements.meta_description') %>
+
+<div class="max-w-5xl px-2 mx-auto mt-16">
+  <h1 class="text-3xl font-medium"><%= t('announcements.header', app_name: Rails.configuration.application_name.titlecase) %></h1>
+
+  <%= link_to '+ Add a announcement', new_announcement_path, class: "mt-4 inline-block text-sm" if current_user&.admin? %>
+</div>
+
+<div class="announcements">
+  <% @announcements.each do |announcement| %>
+    <article class="announcement" id="<%= dom_id(announcement) %>">
+      <h2 class="announcement__title">
+        <%= announcement.title %>
+
+        <%= tag.span announcement.published_at.strftime("%B %Y"), class: "announcement__published" %>
+      </h2>
+
+      <%= tag.span announcement.announcement_type, class: "announcement__type announcement__type--#{announcement.announcement_type}" %>
+
+      <%= simple_format announcement.body %>
+
+      <%= tag.div class: "block" do %>
+        <%= link_to t('links.edit'), edit_announcement_path(announcement), class: "text-sm text-gray-600" %>
+
+        <%= link_to t('links.delete'), announcement_path(announcement), method: :delete, data: { confirm: 'Are you sure you want to remove this announcement?' }, class: "ml-2 text-sm text-red-600" %>
+      <% end if current_user&.admin? %>
+    </article>
+  <% end %>
+
+  <% if @announcements.empty? %>
+    <article class="announcement announcement--none">
+      <h2 class="announcement__title"><%= t('announcements.empty_state_text') %></h2>
+    </article>
+  <% end %>
+</div>
+
+
