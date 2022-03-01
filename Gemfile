@@ -21,7 +21,7 @@ gem 'name_of_person', '~> 1.1', '>= 1.1.1'
 gem 'httparty', '~> 0.17.1'
 gem 'storext', '~> 3.1'
 gem 'redis', '~> 4.2', '>= 4.2.5'
-gem 'image_processing', '~> 1.12', '>= 1.12.1'
+gem 'image_processing', '~> 1.12'
 gem 'aws-sdk-s3', '~> 1.84', '>= 1.84.1'
 gem 'bugsnag', '~> 6.12', '>= 6.12.1'
 
